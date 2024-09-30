@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Interactivity</title>
+    <style>
+        #dropdown {
+            display: none;
+        }
+
+        #mousePosition {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>JavaScript Interactive Features</h1> 
+    <button onclick="alert('Button Clicked!')">Click Me</button> 
+    <p onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">
+        Hover over this text to change its color.
+    </p> <!-- 3. Form Validation -->
+    <form onsubmit="return validateForm(event)">
+        <input type="text" id="requiredField" placeholder="Required Field" required>
+        <button type="submit">Submit</button>
+    </form> <!-- 4. Image Gallery -->
+    <img id="mainImage" src="4775300538a54d4ed683aa5f1e3df706.jpg" alt="Main Image" style="width:300px;">
+    <div>
+        <img src="./wp6846432.jpg" onclick="changeImage('./39423623.webp')" alt="Thumbnail 1" style="width:100px;">
+        <img src="./39423623.webp"onclick="changeImage('./wp6846432.jpg')" alt="Thumbnail 2" style="width:100px;">
+    </div> <!-- 5. Dropdown Menu -->
+    <nav>
+        <div onmouseover="document.getElementById('dropdown').style.display='block'"
+            onmouseout="document.getElementById('dropdown').style.display='none'">
+            Menu
+            <div id="dropdown">
+                <a href="#">Item 1</a>
+                <a href="#">Item 2</a>
+            </div>
+        </div>
+    </nav> <!-- 6. Counter -->
+    <button onclick="incrementCounter()">Click Me</button>
+    <p id="counterDisplay">Counter: 0</p> 
+    <input type="checkbox" id="toggleCheckbox" onchange="toggleButton()"> Enable Button
+    <button id="enabledButton" disabled>Action</button>
+    <div id="mousePosition"></div> 
+    <p>Press any key to change the background color.</p> 
+    <input type="text" id="phoneInput" oninput="formatPhoneNumber()" placeholder="(123) 456-7890">
+    <script>
+       
+        function validateForm(event) {
+            const field = document.getElementById('requiredField').value;
+            if (!field) {
+                alert('Please fill in the required field.');
+                event.preventDefault();
+            }
+        }      
+        function changeImage(src) {
+            document.getElementById('mainImage').src = src;
+        }       
+        let counter = 0;
+        function incrementCounter() {
+            counter++;
+            if (counter > 10) counter = 0;
+            document.getElementById('counterDisplay').innerText = 'Counter: ' + counter;
+        }      
+        function toggleButton() {
+            const checkbox = document.getElementById('toggleCheckbox');
+            document.getElementById('enabledButton').disabled = !checkbox.checked;
+        }       
+        document.onmousemove = function (event) {
+            const positionDisplay = document.getElementById('mousePosition');
+            positionDisplay.innerText = `X: ${event.clientX}, Y: ${event.clientY}`;
+        };        
+        document.onkeydown = function () {
+            document.body.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        };       
+        function formatPhoneNumber() {
+            const input = document.getElementById('phoneInput');
+            let value = input.value.replace(/\D/g, '').substring(0, 10);
+            if (value.length >= 6) {
+                value = `(${value.substring(0, 3)}) ${value.substring(3, 6)}-${value.substring(6, 10)}`;
+            } else if (value.length >= 3) {
+                value = `(${value.substring(0, 3)}) ${value.substring(3)}`;
+            } else if (value.length > 0) {
+                value = `(${value}`;
+            }
+            input.value = value;
+        }
+    </script>
+</body>
+
+</html>

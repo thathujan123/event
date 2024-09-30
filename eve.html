@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Interactivity</title>
+
+</head>
+
+<body>
+    <h1>JavaScript Interactive Features</h1>
+    <button onclick="alert('Button Clicked!')">Click Me</button>
+    <p onmouseover="style.color='red'" onmouseout="style.color='black'">
+        Hover over this text to change its color.
+    </p> 
+    <form onsubmit="validateForm(event)">
+        <input type="text" id="requiredField" placeholder="Required Field" required>
+        <button type="submit">Submit</button>
+    </form>
+    <img id="mainImage" src="4775300538a54d4ed683aa5f1e3df706.jpg"  style="width:300px;">
+    <div>
+        <img src="./wp6846432.jpg" onclick="changeImage('./39423623.webp')"  style="width:100px;">
+        <img src="./39423623.webp" onclick="changeImage('./wp6846432.jpg')"  style="width:100px;">
+    </div> 
+    <script>
+        function validateForm(event) {
+            const field = document.getElementById('requiredField').value;
+            if (!field) {
+                alert('Please fill in the required field.');
+                event.preventDefault();
+            }
+        }
+        function changeImage(src) {
+            document.getElementById('mainImage').src = src;
+        }       
+    </script>
